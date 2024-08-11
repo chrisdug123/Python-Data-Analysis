@@ -104,5 +104,29 @@ agg_data = grouped.agg({
 print(agg_data)
 
 df['Class']=['X','X','Y','Y','X','Y','Y','X']
-grouped_multi = df.groupby(['School','Class'])
+#grouped_multi = df.groupby(['School','Class'])
 #print(grouped_multi.mean())
+
+sports_data = {
+    'Student ID': [1001,1002,1003,1004,1009,1010],
+    'Sports':['Basketball','Football','Badminton','Volleyball','Football','Basketball']
+}
+
+sports_df=pd.DataFrame(sports_data)
+
+merged_df=pd.merge(df, sports_df, on='Student ID')
+merged_outer = pd.merge(df,sports_df, on='Student ID', how='outer')
+#print(merged_df)
+#print(merged_outer)
+
+new_data = {
+       'School': ['A','B','A','B'],
+    'Student ID':[1009,1010,1011,1012],
+    'Math': np.random.randint(60,100,4),
+    'English': np.random.randint(60,100,4),
+    'History': np.random.randint(60,100,4),
+    'Class':['X','Y','Y','X']
+}
+df_new=pd.DataFrame(new_data)
+concatenated_df = pd.concat([df,df_new], ignore_index=True)
+print(concatenated_df)
