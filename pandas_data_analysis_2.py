@@ -81,52 +81,73 @@ import pandas as pd
 #df['B'] = df['B'].map(categorize)
 #print(df)
 
-data = {
-    'School': ['A','B','A','B','A','B','A','B'],
-    'Student ID':[1001,1002,1003,1004,1005,1006,1007,1008],
-    'Math': np.random.randint(60,100,8),
-    'English': np.random.randint(70,100,8),
-    'History': np.random.randint(50,100,8)
-}
+#data = {
+#    'School': ['A','B','A','B','A','B','A','B'],
+#    'Student ID':[1001,1002,1003,1004,1005,1006,1007,1008],
+#    'Math': np.random.randint(60,100,8),
+#    'English': np.random.randint(70,100,8),
+#    'History': np.random.randint(50,100,8)
+#}
 
-df=pd.DataFrame(data)
-print(df)
+#df=pd.DataFrame(data)
+#print(df)
 
-grouped = df.groupby('School')
+#grouped = df.groupby('School')
 #print('Mean scoresby school: ')
 #print(grouped.mean())
 
-agg_data = grouped.agg({
-    'Math':['mean','median','std'],
-    'English':['mean','max'],
-    'History':['min','max']
-})   
-print(agg_data)
+#agg_data = grouped.agg({
+#    'Math':['mean','median','std'],
+#    'English':['mean','max'],
+#    'History':['min','max']
+#})   
+#print(agg_data)
 
-df['Class']=['X','X','Y','Y','X','Y','Y','X']
+#df['Class']=['X','X','Y','Y','X','Y','Y','X']
 #grouped_multi = df.groupby(['School','Class'])
 #print(grouped_multi.mean())
 
-sports_data = {
-    'Student ID': [1001,1002,1003,1004,1009,1010],
-    'Sports':['Basketball','Football','Badminton','Volleyball','Football','Basketball']
-}
+#sports_data = {
+#    'Student ID': [1001,1002,1003,1004,1009,1010],
+#    'Sports':['Basketball','Football','Badminton','Volleyball','Football','Basketball']
+#}
 
-sports_df=pd.DataFrame(sports_data)
+#sports_df=pd.DataFrame(sports_data)
 
-merged_df=pd.merge(df, sports_df, on='Student ID')
-merged_outer = pd.merge(df,sports_df, on='Student ID', how='outer')
+#merged_df=pd.merge(df, sports_df, on='Student ID')
+#merged_outer = pd.merge(df,sports_df, on='Student ID', how='outer')
 #print(merged_df)
 #print(merged_outer)
 
-new_data = {
-       'School': ['A','B','A','B'],
-    'Student ID':[1009,1010,1011,1012],
-    'Math': np.random.randint(60,100,4),
-    'English': np.random.randint(60,100,4),
-    'History': np.random.randint(60,100,4),
-    'Class':['X','Y','Y','X']
-}
-df_new=pd.DataFrame(new_data)
-concatenated_df = pd.concat([df,df_new], ignore_index=True)
-print(concatenated_df)
+#new_data = {
+#       'School': ['A','B','A','B'],
+#    'Student ID':[1009,1010,1011,1012],
+#    'Math': np.random.randint(60,100,4),
+#    'English': np.random.randint(60,100,4),
+#    'History': np.random.randint(60,100,4),
+#    'Class':['X','Y','Y','X']
+#}
+#df_new=pd.DataFrame(new_data)
+#concatenated_df = pd.concat([df,df_new], ignore_index=True)
+#print(concatenated_df)
+
+date_rng = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+stock_data = 100 + np.cumsum(np.random.randn(365)*2)
+
+df = pd.DataFrame(stock_data, index=date_rng, columns=['Price'])
+print(df.head())
+
+
+monthly_avg = df.resample('M').mean()
+print(monthly_avg)
+
+df_shifted = df.shift(1)
+print(df_shifted.head())
+
+df['Price Next Day'] = df['Price'].shift(1)
+df['Day-to-day-change'] = df['Price'] - df['Price Next Day']
+
+print(df.head())
+
+df_rolling = df.rolling(window=7).mean()
+print(df_rolling)
