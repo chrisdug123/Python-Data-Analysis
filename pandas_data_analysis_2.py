@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 # Series
 #data_series = np.random.normal(0,1,100)
@@ -135,19 +135,45 @@ date_rng = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
 stock_data = 100 + np.cumsum(np.random.randn(365)*2)
 
 df = pd.DataFrame(stock_data, index=date_rng, columns=['Price'])
-print(df.head())
+#print(df.head())
 
 
-monthly_avg = df.resample('M').mean()
-print(monthly_avg)
+#monthly_avg = df.resample('M').mean()
+#print(monthly_avg)
 
-df_shifted = df.shift(1)
-print(df_shifted.head())
+#df_shifted = df.shift(1)
+#print(df_shifted.head())
 
-df['Price Next Day'] = df['Price'].shift(1)
-df['Day-to-day-change'] = df['Price'] - df['Price Next Day']
+#df['Price Next Day'] = df['Price'].shift(1)
+#df['Day-to-day-change'] = df['Price'] - df['Price Next Day']
 
-print(df.head())
+#print(df.head())
 
-df_rolling = df.rolling(window=7).mean()
-print(df_rolling)
+#df_rolling = df.rolling(window=7).mean()
+#print(df_rolling)
+
+grades_data = {
+    'Subjects':['Math','English','History','Biology', 'Physics'],
+    'Average_Grade':[85,90,78,92,88]
+}
+
+#grades_df=pd.DataFrame(grades_data)
+
+#bar chart
+#grades_df.plot(kind='bar', x='Subjects', y='Average_Grade', title='Average Grades for Subjects')
+#plt.ylabel('Average Grade')
+#plt.tight_layout
+#plt.show()
+
+#line chart
+#df.plot(title='Stock Price Over Time')
+#plt.xlabel('Date')
+#plt.ylabel('Price')
+#plt.tight_layout()
+#plt.show()
+
+#histogram
+#df['Price'].diff().plot(kind='hist',title='Distribution of Price Changes', bins=30)
+#plt.xlabel('Price Change')
+#plt.tight_layout()
+#plt.show()
