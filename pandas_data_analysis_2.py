@@ -63,3 +63,21 @@ df =pd.DataFrame(data)
 #df_filled = df.fillna(0)
 #print(df_filled)
 
+#df= pd.concat([df,df.iloc[2]])
+#print(df)
+
+#df_no_duplications = df.drop_duplicates()
+#print(df_no_duplications)
+
+# map()
+
+def categorize(value):
+    if pd.isna(value):
+        return 'Missing'
+    elif value <3:
+        return 'Low'
+    else:
+        return 'High'
+df['B'] = df['B'].map(categorize)
+print(df)
+    
