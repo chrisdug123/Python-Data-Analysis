@@ -177,3 +177,25 @@ grades_data = {
 #plt.xlabel('Price Change')
 #plt.tight_layout()
 #plt.show()
+
+data = {
+    'A': np.random.randn(100),
+    'B': np.random.randn(100)
+}
+
+#scatter_df = pd.DataFrame(data)
+#scatter_df.plot(kind='scatter', x='A', y='B')
+#plt.xlabel('Value of A')
+#plt.ylabel('Value of B')
+#plt.tight_layout()
+#plt.show()
+
+data['A'] = np.random.randn(100)
+data['B'] = data['A'] * 2 + np.random.randn(100)*0.5
+
+scatter_df_corr=pd.DataFrame(data)
+scatter_df_corr.plot(kind='scatter', x='A', y='B')
+plt.xlabel('Value of A')
+plt.ylabel('Value of B')
+plt.tight_layout()
+plt.show()
