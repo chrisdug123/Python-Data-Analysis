@@ -52,6 +52,14 @@ data = {
 }
 
 df =pd.DataFrame(data)
-print(df)
+#print(df.isna())
 
+#df_dropped = df.dropna()
+#print(df_dropped)
+
+#df_dropped_col = df.dropna(axis=1)
+#print(df_dropped_col)
+
+#df_filled = df.fillna(0)
+#print(df_filled)
 
