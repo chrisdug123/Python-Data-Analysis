@@ -45,13 +45,13 @@ import pandas as pd
 #df.drop(columns='Total', inplace=True)
 #print(df)
 
-data = {
-    'A': [1,2, np.nan, 4, 5],
-    'B': [np.nan, 2,3,4,5],
-    'C':[1,2,3, np.nan, np.nan]
-}
+#data = {
+#    'A': [1,2, np.nan, 4, 5],
+#    'B': [np.nan, 2,3,4,5],
+#    'C':[1,2,3, np.nan, np.nan]
+#}
 
-df =pd.DataFrame(data)
+#df =pd.DataFrame(data)
 #print(df.isna())
 
 #df_dropped = df.dropna()
@@ -71,13 +71,38 @@ df =pd.DataFrame(data)
 
 # map()
 
-def categorize(value):
-    if pd.isna(value):
-        return 'Missing'
-    elif value <3:
-        return 'Low'
-    else:
-        return 'High'
-df['B'] = df['B'].map(categorize)
+#def categorize(value):
+#    if pd.isna(value):
+#        return 'Missing'
+#    elif value <3:
+#        return 'Low'
+#    else:
+#        return 'High'
+#df['B'] = df['B'].map(categorize)
+#print(df)
+
+data = {
+    'School': ['A','B','A','B','A','B','A','B'],
+    'Student ID':[1001,1002,1003,1004,1005,1006,1007,1008],
+    'Math': np.random.randint(60,100,8),
+    'English': np.random.randint(70,100,8),
+    'History': np.random.randint(50,100,8)
+}
+
+df=pd.DataFrame(data)
 print(df)
-    
+
+grouped = df.groupby('School')
+#print('Mean scoresby school: ')
+#print(grouped.mean())
+
+agg_data = grouped.agg({
+    'Math':['mean','median','std'],
+    'English':['mean','max'],
+    'History':['min','max']
+})   
+print(agg_data)
+
+df['Class']=['X','X','Y','Y','X','Y','Y','X']
+grouped_multi = df.groupby(['School','Class'])
+#print(grouped_multi.mean())
